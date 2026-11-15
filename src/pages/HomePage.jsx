@@ -100,9 +100,22 @@ export default function HomePage() {
       />
 
       {/* 1. HERO SECTION - MATCHING REFERENCE DESIGN */}
-      <section className="relative bg-[#0B1323] text-white pt-10 sm:pt-16 pb-16 sm:pb-20 px-4 sm:px-6 lg:px-8 overflow-hidden">
-        {/* Subtle Ambient Radial Lighting */}
-        <div className="absolute top-1/4 left-1/3 -translate-x-1/2 w-[450px] h-[450px] bg-[radial-gradient(circle,rgba(255,87,34,0.12)_0%,transparent_65%)] pointer-events-none" />
+      <section className="relative bg-[#080E1A] text-white pt-10 sm:pt-16 pb-16 sm:pb-20 px-4 sm:px-6 lg:px-8 overflow-hidden">
+        {/* Atmospheric Café Ambience Background Image matching Reference Design */}
+        <div className="absolute inset-0 pointer-events-none select-none overflow-hidden">
+          <img
+            src="https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?auto=format&fit=crop&w=1920&q=80"
+            alt="Urban Tadka Cafe Warm Ambience"
+            className="w-full h-full object-cover object-center opacity-30 scale-105"
+            loading="eager"
+            decoding="async"
+          />
+          {/* Multi-stop Dark Gradient Varnish for High Contrast & Text Legibility */}
+          <div className="absolute inset-0 bg-gradient-to-b from-[#080E1A]/90 via-[#0A111F]/75 to-[#0A111F]" />
+          {/* Warm Amber/Orange Radial Accents matching Reference */}
+          <div className="absolute top-1/4 left-1/3 -translate-x-1/2 w-[550px] h-[550px] bg-[radial-gradient(circle,rgba(255,87,34,0.18)_0%,transparent_65%)]" />
+          <div className="absolute bottom-1/4 right-1/4 w-[450px] h-[450px] bg-[radial-gradient(circle,rgba(245,158,11,0.12)_0%,transparent_70%)]" />
+        </div>
 
         <div className="max-w-7xl mx-auto space-y-12 sm:space-y-16 relative z-10">
           {/* Main Hero Split Grid */}
@@ -162,18 +175,18 @@ export default function HomePage() {
                   {/* Food Platter Showcase matching reference */}
                   <div className="relative rounded-3xl overflow-hidden shadow-2xl border-2 border-white/10 bg-slate-900/60 aspect-4/3 sm:aspect-square flex items-center justify-center">
                     <img
-                      src="https://images.unsplash.com/photo-1546833999-b9f581a1996d?auto=format&fit=crop&w=900&q=80"
-                      alt="Signature Tadka Bowl Platter"
+                      src="https://images.unsplash.com/photo-1569718212165-3a8278d5f624?auto=format&fit=crop&w=1000&q=80"
+                      alt="Signature Tadka Bowl"
                       className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 ease-out"
                       loading="eager"
                       decoding="async"
                     />
 
                     {/* Gradient Overlay */}
-                    <div className="absolute inset-0 bg-gradient-to-t from-[#0B1323]/80 via-transparent to-black/10" />
+                    <div className="absolute inset-0 bg-gradient-to-t from-[#080E1A]/80 via-transparent to-black/10" />
 
-                    {/* Quality Floating Badge */}
-                    <div className="absolute bottom-4 left-4 right-4 flex items-center justify-between text-white text-xs bg-black/60 backdrop-blur-md px-3.5 py-2 rounded-2xl border border-white/15">
+                    {/* Floating Rating Pill matching reference */}
+                    <div className="absolute bottom-4 left-4 right-4 flex items-center justify-between text-white text-xs bg-[#080E1A]/80 backdrop-blur-md px-3.5 py-2 rounded-2xl border border-white/15">
                       <div className="flex items-center gap-1.5 font-bold text-amber-400">
                         <Star size={14} className="fill-amber-400" />
                         <span className="text-white">4.8 Rating</span>
@@ -492,8 +505,20 @@ export default function HomePage() {
       {/* 5. RESERVATION STRIP */}
       <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <ScrollReveal animation="fade-up" delay={100}>
-          <div className="p-8 sm:p-10 rounded-3xl bg-[#0B1323] text-white flex flex-col md:flex-row items-center justify-between gap-6 border border-white/10 shadow-xl">
-            <div className="space-y-1.5 text-center md:text-left">
+          <div className="relative overflow-hidden p-8 sm:p-10 rounded-3xl bg-[#080E1A] text-white flex flex-col md:flex-row items-center justify-between gap-6 border border-white/10 shadow-xl">
+            {/* Background Ambience Texture */}
+            <div className="absolute inset-0 pointer-events-none select-none">
+              <img
+                src="https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?auto=format&fit=crop&w=1200&q=80"
+                alt="Café Ambience"
+                className="w-full h-full object-cover opacity-20"
+                loading="lazy"
+                decoding="async"
+              />
+              <div className="absolute inset-0 bg-gradient-to-r from-[#080E1A] via-[#080E1A]/90 to-[#080E1A]/80" />
+            </div>
+
+            <div className="relative z-10 space-y-1.5 text-center md:text-left">
               <h3 className="text-xl sm:text-2xl font-extrabold text-white">
                 Planning a Visit to Urban Tadka?
               </h3>
@@ -502,7 +527,7 @@ export default function HomePage() {
               </p>
             </div>
 
-            <div className="flex items-center gap-3 shrink-0">
+            <div className="relative z-10 flex items-center gap-3 shrink-0">
               <Link
                 to="/contact"
                 className="px-6 py-3 bg-[#FF5722] hover:bg-orange-600 text-white font-bold rounded-full text-xs sm:text-sm transition shadow-md active:scale-95"
