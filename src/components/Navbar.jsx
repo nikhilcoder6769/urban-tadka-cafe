@@ -11,7 +11,6 @@ import {
 } from 'lucide-react';
 import { businessConfig } from '../data/businessConfig';
 import { useCart } from '../context/CartContext';
-import OpenStatusBadge from './OpenStatusBadge';
 import ThemeToggle from './ThemeToggle';
 
 export default function Navbar() {
@@ -25,10 +24,10 @@ export default function Navbar() {
     setMobileMenuOpen(false);
   }, [location.pathname]);
 
-  // Handle scroll detection for glassmorphism styling
+  // Handle scroll detection
   useEffect(() => {
     const handleScroll = () => {
-      setIsScrolled(window.scrollY > 15);
+      setIsScrolled(window.scrollY > 20);
     };
     window.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);
@@ -37,86 +36,69 @@ export default function Navbar() {
   const navLinks = [
     { to: '/', label: 'Home' },
     { to: '/menu', label: 'Menu' },
-    { to: '/about', label: 'About Us' },
     { to: '/gallery', label: 'Gallery' },
+    { to: '/about', label: 'About' },
     { to: '/contact', label: 'Contact' },
-    { to: '/location', label: 'Location' },
   ];
-
-  const defaultWhatsAppUrl = `https://wa.me/${businessConfig.contact.whatsapp}?text=${encodeURIComponent(
-    businessConfig.whatsappMessages.general
-  )}`;
 
   return (
     <>
-      {/* Top Bar - Clean, Minimal & Informative */}
-      <div className="bg-[#0A111F] text-slate-300 text-[11px] sm:text-xs py-2 px-4 border-b border-white/5">
-        <div className="max-w-7xl mx-auto flex items-center justify-between">
-          <div className="flex items-center gap-2 text-slate-400">
-            <MapPin size={12} className="text-[#FF5722] shrink-0" />
-            <span className="font-medium text-slate-300 truncate">
-              Galleria Boulevard, HSR Layout, Bengaluru
-            </span>
-          </div>
-
-          <div className="flex items-center gap-4 text-slate-300 shrink-0">
-            <span className="hidden md:flex items-center gap-1.5 text-slate-400">
-              <Clock size={12} className="text-amber-400" />
-              <span>11:00 AM – 11:30 PM</span>
-            </span>
-            <span className="hidden md:inline text-slate-700">•</span>
-            <a
-              href={`tel:${businessConfig.contact.phoneRaw}`}
-              className="hover:text-white flex items-center gap-1.5 transition text-slate-300"
-            >
-              <Phone size={12} className="text-[#FF5722]" />
-              <span className="hidden sm:inline">{businessConfig.contact.phone}</span>
-              <span className="sm:hidden font-semibold">Call</span>
-            </a>
-          </div>
-        </div>
-      </div>
-
-      {/* Main Sticky Navbar */}
+      {/* Main Sticky Navbar styled like reference */}
       <header
         className={`sticky top-0 z-40 transition-all duration-300 ${
           isScrolled
-            ? 'bg-white/95 backdrop-blur-md shadow-sm py-3 border-b border-slate-100'
-            : 'bg-[#FFFDF9]/95 backdrop-blur-sm py-3.5 border-b border-slate-200/40'
+            ? 'bg-[#0B1323]/95 backdrop-blur-md shadow-md py-3 border-b border-white/10'
+            : 'bg-[#0B1323] py-4 border-b border-white/5'
         }`}
       >
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between gap-4">
-          {/* Logo & Brand Identity */}
+          {/* Logo matching Reference Design */}
           <Link to="/" className="flex items-center gap-2.5 group">
-            <div className="w-9 h-9 sm:w-10 sm:h-10 rounded-xl bg-gradient-to-tr from-[#FF5722] to-amber-500 text-white flex items-center justify-center shadow-sm group-hover:scale-105 transition-transform">
-              <span className="text-lg">🌶️</span>
+            <div className="relative flex items-center justify-center text-[#FF5722] group-hover:scale-105 transition-transform">
+              <svg
+                className="w-8 h-8 sm:w-9 sm:h-9"
+                viewBox="0 0 32 32"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="2.2"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+              >
+                {/* Chef Hat */}
+                <path
+                  d="M10 13c-2.2 0-3.5-1.8-3-4 .5-2 2.5-3 4.5-2.5C12.5 4.5 15 3 17 3s4.5 1.5 5.5 3.5c2-.5 4 .5 4.5 2.5.5 2.2-.8 4-3 4"
+                  stroke="#FF5722"
+                />
+                {/* Cup / Bowl Base */}
+                <path
+                  d="M7 16h18v4a6 6 0 0 1-6 6h-6a6 6 0 0 1-6-6v-4z"
+                  stroke="#FF5722"
+                />
+                {/* Cup Handle */}
+                <path d="M25 18a2.5 2.5 0 0 1 0 5" stroke="#FF5722" />
+                {/* Base Saucer Line */}
+                <path d="M9 28h14" stroke="#FF5722" strokeWidth="2" />
+              </svg>
             </div>
-            <div>
-              <div className="flex items-center gap-1.5">
-                <span className="font-extrabold text-base sm:text-lg tracking-tight text-[#0F1E36]">
-                  Urban Tadka
-                </span>
-                <span className="text-[10px] font-black uppercase text-[#FF5722] bg-orange-50 px-1.5 py-0.2 rounded border border-orange-100">
-                  Café
-                </span>
-              </div>
-              <p className="text-[10px] font-medium text-slate-500 tracking-wide leading-none">
-                {businessConfig.tagline}
-              </p>
+            <div className="flex flex-col">
+              <span className="font-extrabold text-lg sm:text-xl tracking-tight leading-tight text-white">
+                Urban
+              </span>
+              <span className="font-bold text-[11px] sm:text-xs tracking-wider text-[#FF5722] leading-tight">
+                Tadka Café
+              </span>
             </div>
           </Link>
 
           {/* Desktop Navigation Links */}
-          <nav className="hidden lg:flex items-center gap-1 bg-slate-100/60 p-1 rounded-xl border border-slate-200/50">
+          <nav className="hidden lg:flex items-center gap-8 text-sm font-medium text-slate-300">
             {navLinks.map((link) => (
               <NavLink
                 key={link.to}
                 to={link.to}
                 className={({ isActive }) =>
-                  `px-4 py-1.5 text-xs font-semibold rounded-lg transition-all duration-200 ${
-                    isActive
-                      ? 'bg-white text-[#FF5722] shadow-xs font-bold'
-                      : 'text-slate-600 hover:text-slate-900 hover:bg-white/50'
+                  `transition-colors hover:text-[#FF5722] ${
+                    isActive ? 'text-[#FF5722] font-semibold' : 'text-slate-300'
                   }`
                 }
               >
@@ -126,14 +108,14 @@ export default function Navbar() {
           </nav>
 
           {/* Right Action Cluster */}
-          <div className="flex items-center gap-2 sm:gap-2.5">
-            {/* Theme Toggle (System / Dark / Light) */}
-            <ThemeToggle />
+          <div className="flex items-center gap-3">
+            {/* Theme Toggle */}
+            <ThemeToggle className="bg-white/5 border-white/10 text-white" />
 
             {/* Quick Order Tray Drawer Trigger */}
             <button
               onClick={() => setIsDrawerOpen(true)}
-              className="relative p-2 rounded-xl bg-slate-100/80 hover:bg-orange-50 text-slate-700 hover:text-[#FF5722] transition-colors border border-slate-200/60"
+              className="relative p-2 rounded-xl bg-white/5 hover:bg-white/10 text-slate-200 hover:text-white transition border border-white/10"
               aria-label="View Order Tray"
             >
               <ShoppingBag size={18} />
@@ -144,21 +126,18 @@ export default function Navbar() {
               )}
             </button>
 
-            {/* WhatsApp CTA (Desktop) */}
-            <a
-              href={defaultWhatsAppUrl}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="hidden sm:inline-flex items-center gap-1.5 px-4 py-2 bg-slate-900 hover:bg-slate-800 text-white text-xs font-semibold rounded-xl shadow-sm transition active:scale-95"
+            {/* Orange "Reservation" Pill Button from Reference */}
+            <Link
+              to="/contact"
+              className="hidden sm:inline-flex items-center px-6 py-2.5 bg-[#FF5722] hover:bg-orange-600 text-white font-bold text-xs sm:text-sm rounded-full shadow-md shadow-orange-500/25 transition-all hover:scale-103 active:scale-97"
             >
-              <MessageCircle size={14} className="text-emerald-400" />
-              <span>Table Inquiry</span>
-            </a>
+              Reservation
+            </Link>
 
-            {/* Hamburger Toggle (Mobile) */}
+            {/* Mobile Hamburger Toggle */}
             <button
               onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-              className="lg:hidden p-2 rounded-xl bg-slate-100 text-slate-800 hover:bg-slate-200 transition"
+              className="lg:hidden p-2 rounded-xl bg-white/5 text-white hover:bg-white/10 transition border border-white/10"
               aria-label="Toggle Navigation Menu"
             >
               {mobileMenuOpen ? <X size={20} /> : <MenuIcon size={20} />}
@@ -169,34 +148,35 @@ export default function Navbar() {
 
       {/* Mobile Drawer Menu */}
       {mobileMenuOpen && (
-        <div className="lg:hidden fixed inset-0 z-50 bg-slate-950/60 backdrop-blur-sm">
-          <div className="fixed inset-y-0 right-0 w-full max-w-xs bg-white shadow-2xl flex flex-col justify-between p-6">
+        <div className="lg:hidden fixed inset-0 z-50 bg-slate-950/70 backdrop-blur-sm">
+          <div className="fixed inset-y-0 right-0 w-full max-w-xs bg-[#0B1323] text-white shadow-2xl flex flex-col justify-between p-6 border-l border-white/10">
             <div>
               {/* Drawer Top */}
-              <div className="flex items-center justify-between pb-4 border-b border-slate-100">
+              <div className="flex items-center justify-between pb-4 border-b border-white/10">
                 <div className="flex items-center gap-2">
-                  <span className="text-2xl">🌶️</span>
+                  <div className="text-[#FF5722]">
+                    <svg className="w-8 h-8" viewBox="0 0 32 32" fill="none" stroke="currentColor" strokeWidth="2.2">
+                      <path d="M10 13c-2.2 0-3.5-1.8-3-4 .5-2 2.5-3 4.5-2.5C12.5 4.5 15 3 17 3s4.5 1.5 5.5 3.5c2-.5 4 .5 4.5 2.5.5 2.2-.8 4-3 4" stroke="#FF5722"/>
+                      <path d="M7 16h18v4a6 6 0 0 1-6 6h-6a6 6 0 0 1-6-6v-4z" stroke="#FF5722"/>
+                      <path d="M25 18a2.5 2.5 0 0 1 0 5" stroke="#FF5722"/>
+                      <path d="M9 28h14" stroke="#FF5722" strokeWidth="2"/>
+                    </svg>
+                  </div>
                   <div>
-                    <h3 className="font-bold text-slate-900 text-base">Urban Tadka Café</h3>
-                    <p className="text-[11px] text-slate-500">{businessConfig.tagline}</p>
+                    <h3 className="font-bold text-white text-base">Urban Tadka Café</h3>
+                    <p className="text-[11px] text-[#FF5722]">{businessConfig.tagline}</p>
                   </div>
                 </div>
                 <button
                   onClick={() => setMobileMenuOpen(false)}
-                  className="w-8 h-8 rounded-full bg-slate-100 flex items-center justify-center text-slate-500"
+                  className="w-8 h-8 rounded-full bg-white/10 flex items-center justify-center text-slate-300"
                 >
                   <X size={18} />
                 </button>
               </div>
 
-              {/* Status & Theme Toggle in Mobile */}
-              <div className="mt-4 mb-2 flex items-center justify-between gap-2">
-                <OpenStatusBadge />
-                <ThemeToggle showLabel={true} />
-              </div>
-
               {/* Mobile Nav Links */}
-              <nav className="mt-4 space-y-1">
+              <nav className="mt-5 space-y-2">
                 {navLinks.map((link) => (
                   <NavLink
                     key={link.to}
@@ -204,39 +184,46 @@ export default function Navbar() {
                     className={({ isActive }) =>
                       `flex items-center justify-between px-4 py-3 rounded-xl text-sm font-semibold transition ${
                         isActive
-                          ? 'bg-orange-50 text-[#FF5722] font-bold'
-                          : 'text-slate-700 hover:bg-slate-50'
+                          ? 'bg-[#FF5722]/20 text-[#FF5722]'
+                          : 'text-slate-200 hover:bg-white/5'
                       }`
                     }
                   >
                     <span>{link.label}</span>
-                    <span className="text-xs text-slate-400">→</span>
+                    <span className="text-xs text-slate-500">→</span>
                   </NavLink>
                 ))}
+                <NavLink
+                  to="/location"
+                  className={({ isActive }) =>
+                    `flex items-center justify-between px-4 py-3 rounded-xl text-sm font-semibold transition ${
+                      isActive
+                        ? 'bg-[#FF5722]/20 text-[#FF5722]'
+                        : 'text-slate-200 hover:bg-white/5'
+                    }`
+                  }
+                >
+                  <span>Location & Map</span>
+                  <span className="text-xs text-slate-500">→</span>
+                </NavLink>
               </nav>
             </div>
 
             {/* Drawer Bottom Actions */}
-            <div className="pt-6 border-t border-slate-100 space-y-2.5">
-              <a
-                href={defaultWhatsAppUrl}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="w-full flex items-center justify-center gap-2 py-3 bg-emerald-600 text-white rounded-xl text-xs font-bold shadow-sm"
+            <div className="pt-6 border-t border-white/10 space-y-3">
+              <Link
+                to="/contact"
+                className="w-full py-3 bg-[#FF5722] text-white rounded-full text-xs font-bold shadow-md flex items-center justify-center gap-2"
               >
-                <MessageCircle size={15} /> WhatsApp Inquiries
-              </a>
+                Reservation
+              </Link>
 
               <a
                 href={`tel:${businessConfig.contact.phoneRaw}`}
-                className="w-full flex items-center justify-center gap-2 py-2.5 bg-slate-100 text-slate-800 rounded-xl text-xs font-semibold hover:bg-slate-200 transition"
+                className="w-full flex items-center justify-center gap-2 py-2.5 bg-white/5 text-slate-200 rounded-xl text-xs font-semibold hover:bg-white/10 transition border border-white/10"
               >
                 <Phone size={14} className="text-[#FF5722]" /> Call {businessConfig.contact.phone}
               </a>
-
-              <div className="text-center text-[11px] text-slate-400 pt-1">
-                HSR Layout, Bengaluru
-              </div>
             </div>
           </div>
         </div>
