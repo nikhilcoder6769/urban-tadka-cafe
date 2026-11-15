@@ -1,0 +1,169 @@
+@import "tailwindcss";
+
+@custom-variant dark (&:where([data-theme="dark"], [data-theme="dark"] *, .dark, .dark *));
+
+@layer base {
+  :root {
+    --color-navy: #0F1E36;
+    --color-navy-dark: #0A1424;
+    --color-orange: #FF5722;
+    --color-orange-hover: #E64A19;
+    --color-cream: #FFFDF7;
+    --color-charcoal: #1E293B;
+    --color-amber: #F59E0B;
+  }
+
+  html {
+    scroll-behavior: smooth;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  body {
+    font-family: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
+    color: var(--color-charcoal);
+    background-color: var(--color-cream);
+    overflow-x: hidden;
+  }
+
+  html.dark body {
+    background-color: #0A111F;
+    color: #F1F5F9;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    font-family: 'Outfit', sans-serif;
+    letter-spacing: -0.02em;
+  }
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #CBD5E1;
+  border-radius: 9999px;
+}
+
+html.dark ::-webkit-scrollbar-thumb {
+  background: #334155;
+}
+
+/* Dark Mode Scoped Color Overrides */
+html.dark .bg-white {
+  background-color: #111C2E !important;
+  color: #F1F5F9 !important;
+}
+
+html.dark .bg-slate-50,
+html.dark .bg-slate-50\/70,
+html.dark .bg-slate-50\/80 {
+  background-color: #0D1626 !important;
+}
+
+html.dark .bg-slate-100,
+html.dark .bg-slate-100\/60,
+html.dark .bg-slate-100\/70,
+html.dark .bg-slate-100\/80,
+html.dark .bg-slate-100\/90 {
+  background-color: #16243B !important;
+  color: #E2E8F0 !important;
+}
+
+html.dark .border-slate-100,
+html.dark .border-slate-100\/80,
+html.dark .border-slate-100\/90,
+html.dark .border-slate-200,
+html.dark .border-slate-200\/40,
+html.dark .border-slate-200\/50,
+html.dark .border-slate-200\/60,
+html.dark .border-slate-200\/80 {
+  border-color: rgba(255, 255, 255, 0.08) !important;
+}
+
+html.dark .text-slate-900,
+html.dark .text-slate-800 {
+  color: #F8FAFC !important;
+}
+
+html.dark .text-slate-700,
+html.dark .text-slate-600 {
+  color: #CBD5E1 !important;
+}
+
+html.dark .text-slate-500 {
+  color: #94A3B8 !important;
+}
+
+html.dark .text-slate-400 {
+  color: #64748B !important;
+}
+
+html.dark input,
+html.dark select,
+html.dark textarea {
+  background-color: #142137 !important;
+  color: #F8FAFC !important;
+  border-color: rgba(255, 255, 255, 0.12) !important;
+}
+
+html.dark header {
+  background-color: rgba(10, 17, 31, 0.95) !important;
+  border-bottom-color: rgba(255, 255, 255, 0.08) !important;
+}
+
+/* Scroll Reveal Classes (High-Performance CSS without will-change GPU bloat) */
+.reveal-init {
+  opacity: 0;
+  transform: translateY(16px);
+  transition: opacity 0.4s ease-out, transform 0.4s ease-out;
+}
+
+.reveal-init.fade-in {
+  transform: none;
+}
+
+.reveal-init.scale-up {
+  transform: scale(0.97);
+}
+
+.reveal-init.fade-left {
+  transform: translateX(-16px);
+}
+
+.reveal-init.fade-right {
+  transform: translateX(16px);
+}
+
+.reveal-active {
+  opacity: 1 !important;
+  transform: translateY(0) scale(1) translateX(0) !important;
+}
+
+/* Stagger Delays */
+.delay-100 { transition-delay: 60ms; }
+.delay-150 { transition-delay: 100ms; }
+.delay-200 { transition-delay: 140ms; }
+.delay-250 { transition-delay: 180ms; }
+.delay-300 { transition-delay: 220ms; }
+
+/* Clean, lightweight shadows without expensive filter re-paints */
+.premium-shadow-hover {
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.premium-shadow-hover:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.08);
+}
+
+html.dark .premium-shadow-hover:hover {
+  box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.5);
+}
